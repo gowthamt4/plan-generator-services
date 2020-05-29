@@ -6,9 +6,9 @@ Repository for Plan Generator Services Coding Challenge
 
 1. Clone the repository and change the directory
 
-   `git clone https://github.com/gowthamt4/heycar-backend-challenge.git`
+   `git clone https://github.com/gowthamt4/plan-generator-services.git`
 
-   `cd heycar-backend-challenge`
+   `cd plan-generator-services`
 
 2. Through IDE or as a Docker container
  a) Run the app from IDE
@@ -21,15 +21,10 @@ Repository for Plan Generator Services Coding Challenge
   `docker-compose up`
 
 4. Postman Collection
-   [heycar-backend-challenge/blob/master/HeyCarCollection.postman_collection](HeyCarCollection.postman_collection)
+   https://www.getpostman.com/collections/b12d07ff82cb99024792
 
 ## Run tests
 
 Running the unit tests can be done like this
 
 `make unit-tests` or `mvn clean test`
-
-
-## Challenge Problems/Details
-
-All the challenge related assumptions and points have been placed in the 
