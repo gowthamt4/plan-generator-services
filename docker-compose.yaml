@@ -1,0 +1,6 @@
+version: '2.0'
+services:
+  plan-generator:
+          build: .
+          ports:
+            - "8080:8080"
