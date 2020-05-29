@@ -11,6 +11,7 @@ Repository for Plan Generator Services Coding Challenge
    `cd plan-generator-services`
 
 2. Through IDE or as a Docker container
+ 
  a) Run the app from IDE
 
    `mvn spring-boot:run`
