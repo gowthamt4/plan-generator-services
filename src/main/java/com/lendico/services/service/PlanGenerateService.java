@@ -12,7 +12,7 @@ import com.lendico.services.rest.model.MonthlyRepayment;
 
 @Service
 public class PlanGenerateService {
-
+  
   public List<MonthlyRepayment> generatePlanPerMonth(LoanDetails loanDetails) {
     List<MonthlyRepayment> finalList = new ArrayList<>();
     List<MonthlyRepayment> comparisionList = new ArrayList<>();
@@ -30,7 +30,6 @@ public class PlanGenerateService {
             if(comparisionList.isEmpty()) {
               interest = doubleRoundOffTwoDecimals(interestRate * initialStandingAmount);
               principal = doubleRoundOffTwoDecimals(initialAnnuity - interest);
-              monthlyRepayment.setPrincipal(String.valueOf(principal));
               monthlyRepayment.setRemainingOutstandingPrincipal(String.valueOf(initialStandingAmount - principal));
               monthlyRepayment.setInitialOutstandingPrincipal(String.valueOf(initialStandingAmount));
             } else {
@@ -38,10 +37,13 @@ public class PlanGenerateService {
               prevMonthRemainingPrincipal = strToDoubleRound(prevMonth.getRemainingOutstandingPrincipal());
               interest = doubleRoundOffTwoDecimals(interestRate * prevMonthRemainingPrincipal);
               principal = doubleRoundOffTwoDecimals(initialAnnuity - interest);
+              if(principal > prevMonthRemainingPrincipal) {
+                principal = prevMonthRemainingPrincipal;
+              } 
               monthlyRepayment.setInitialOutstandingPrincipal(String.valueOf(prevMonthRemainingPrincipal));
-              monthlyRepayment.setPrincipal(String.valueOf(principal));
-              monthlyRepayment.setRemainingOutstandingPrincipal(String.valueOf(prevMonthRemainingPrincipal - principal));
+              monthlyRepayment.setRemainingOutstandingPrincipal(String.valueOf(doubleRoundOffTwoDecimals(prevMonthRemainingPrincipal - principal)));
             }
+            monthlyRepayment.setPrincipal(String.valueOf(principal));
             monthlyRepayment.setInterest(String.valueOf(interest));
             monthlyRepayment.setBorrowerPaymentAmount(String.valueOf(initialAnnuity));
             comparisionList.add(monthlyRepayment);
