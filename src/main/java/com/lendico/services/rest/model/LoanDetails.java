@@ -22,9 +22,9 @@ public class LoanDetails implements Serializable{
   private String nominalRate;
   
   @NotNull(message = "Duration of the loan is missing in the request body")
-  private int duration;
+  private Integer duration;
   
-  @NotNull
+  @NotNull(message = "StartDate of the loan is missing")
   private String startDate;
 
 }
