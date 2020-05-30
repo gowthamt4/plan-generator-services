@@ -28,4 +28,4 @@ Repository for Plan Generator Services Coding Challenge
 
 Running the unit tests can be done like this
 
-`make unit-tests` or `mvn clean test`
+`mvn clean test`
