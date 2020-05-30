@@ -1,5 +1,7 @@
 package com.lendico.services.rest.model;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +11,7 @@ public class MonthlyRepayment {
 
   private String borrowerPaymentAmount;
   
-  //private String date;
+  private String date;
   
   private String initialOutstandingPrincipal;
   

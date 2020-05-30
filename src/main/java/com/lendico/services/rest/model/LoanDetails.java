@@ -24,5 +24,7 @@ public class LoanDetails implements Serializable{
   @NotNull(message = "Duration of the loan is missing in the request body")
   private int duration;
   
+  @NotNull
+  private String startDate;
 
 }
