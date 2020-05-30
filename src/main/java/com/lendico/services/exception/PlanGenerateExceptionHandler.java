@@ -23,4 +23,12 @@ public class PlanGenerateExceptionHandler {
     ErrorResponse error = new ErrorResponse("Invalid Request Body", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), details);
     return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
   }
+  
+  @ExceptionHandler(InvalidLoanDetailsException.class)
+  public ResponseEntity<Object> handlenvalidLoanDetailsException(InvalidLoanDetailsException ex, WebRequest request) {
+    List<String> details = new ArrayList<>();
+    details.add(ex.getMessage());
+    ErrorResponse error = new ErrorResponse("Invalid Request Body", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), details);
+    return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
+  }
 }

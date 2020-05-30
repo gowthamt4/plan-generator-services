@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Service;
 
+import com.lendico.services.exception.InvalidLoanDetailsException;
 import com.lendico.services.rest.model.LoanDetails;
 import com.lendico.services.rest.model.MonthlyRepayment;
 
@@ -24,7 +25,7 @@ public class PlanGenerateService {
     double initialStandingAmount = strToDoubleRound(loanDetails.getLoanAmount());
     double initialAnnuity = doubleRoundOffTwoDecimals((interestRate * initialStandingAmount)/(1-Math.pow((1+interestRate), -loanDetails.getDuration())));
     
-    if(loanDetails.getDuration() > 0 && interestRate > 0 && initialStandingAmount > 0 && initialAnnuity > 0) {
+    if(loanDetails.getDuration() > 0 && interestRate > 0 && initialStandingAmount > 0) {
       Date startDate = strToDate(loanDetails.getStartDate());
       
       finalList = IntStream.rangeClosed(1, loanDetails.getDuration())
@@ -61,7 +62,9 @@ public class PlanGenerateService {
               return monthlyRepayment;
           })
           .collect(Collectors.toList());
-    } 
+    } else {
+      throw new InvalidLoanDetailsException("Make sure Interest Rate, Duration and Loan Amount are valid");
+    }
     
     return finalList;
   }
