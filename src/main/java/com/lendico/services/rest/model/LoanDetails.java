@@ -2,6 +2,7 @@ package com.lendico.services.rest.model;
 
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,8 @@ public class LoanDetails implements Serializable{
   private String nominalRate;
   
   @NotNull(message = "Duration of the loan is missing in the request body")
-  private Integer duration;
+  @Positive(message = "Duration of the loan should be positive")
+  private int duration;
   
   @NotNull(message = "StartDate of the loan is missing")
   private String startDate;

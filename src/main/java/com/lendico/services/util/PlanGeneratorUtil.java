@@ -10,14 +10,19 @@ import java.util.TimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lendico.services.exception.InvalidDateFormatException;
+import com.lendico.services.exception.InvalidDoubleFormatException;
+
 public class PlanGeneratorUtil {
   
   private static final String ZULU_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
   
-  private static final Logger logger = LoggerFactory.getLogger(PlanGeneratorUtil.class);
-  
   public static double strToDoubleRound(String str) {
-    return Math.round(Double.valueOf(str)*100)/100.00; 
+    try {
+      return Math.round(Double.valueOf(str)*100)/100.00; 
+    } catch (NumberFormatException e){
+      throw new InvalidDoubleFormatException("Expecting double value but it was "+str);
+    }
   }
   
   public static double doubleRoundOffTwoDecimals(double doubleValue) {
@@ -33,9 +38,7 @@ public class PlanGeneratorUtil {
       cal.setTime(dateformat.parse(dateStr));
       return cal.getTime();
     } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      logger.error("Invalid Date format in the request");
-      return null;
+      throw new InvalidDateFormatException("Invalid Date Format and Format should be yyyy-MM-dd'T'HH:mm:ss'Z'");
     }
   }
   

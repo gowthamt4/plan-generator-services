@@ -1,7 +1,5 @@
 package com.lendico.services.rest.model;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 

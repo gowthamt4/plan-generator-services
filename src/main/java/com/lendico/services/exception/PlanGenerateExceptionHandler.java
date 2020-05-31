@@ -13,7 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
 public class PlanGenerateExceptionHandler {
-
+  
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Object> handleMethodArgumentInavlidException(MethodArgumentNotValidException ex, WebRequest request) {
     List<String> details = new ArrayList<>();
@@ -25,7 +25,23 @@ public class PlanGenerateExceptionHandler {
   }
   
   @ExceptionHandler(InvalidLoanDetailsException.class)
-  public ResponseEntity<Object> handlenvalidLoanDetailsException(InvalidLoanDetailsException ex, WebRequest request) {
+  public ResponseEntity<Object> handleInvalidLoanDetailsException(InvalidLoanDetailsException ex, WebRequest request) {
+    List<String> details = new ArrayList<>();
+    details.add(ex.getMessage());
+    ErrorResponse error = new ErrorResponse("Invalid Request Body", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), details);
+    return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
+  }
+  
+  @ExceptionHandler(InvalidDoubleFormatException.class)
+  public ResponseEntity<Object> handleInValidDoubleFormatException(InvalidDoubleFormatException ex, WebRequest request) {
+    List<String> details = new ArrayList<>();
+    details.add(ex.getMessage());
+    ErrorResponse error = new ErrorResponse("Invalid Request Body", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), details);
+    return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
+  }
+  
+  @ExceptionHandler(InvalidDateFormatException.class)
+  public ResponseEntity<Object> handleInvalidDateFormatException(InvalidDateFormatException ex, WebRequest request) {
     List<String> details = new ArrayList<>();
     details.add(ex.getMessage());
     ErrorResponse error = new ErrorResponse("Invalid Request Body", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(), details);
