@@ -24,8 +24,3 @@ Repository for Plan Generator Services Coding Challenge
 4. Postman Collection
    https://www.getpostman.com/collections/b12d07ff82cb99024792
 
-## Run tests
-
-Running the unit tests can be done like this
-
-`mvn clean test`
